@@ -39,7 +39,6 @@
   color: white;
 }
 
-
 .nav {
   width: 100%;
   height: calc(1 * 54px);
@@ -137,13 +136,88 @@
 .filters {
   display: block;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: ghostwhite;
   width: 100%;
   height: 455px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
   z-index: 101;
-  top: 48px;
+  top: 47px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.filters button {
+  font-family: 'Lexend', sans-serif;
+  background: blue;
+  margin: 0px;
+  padding: 8px 8px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.2s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 4px;
+  border: none;
+  display: block;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.filters .on {
+  background:blue;
+  color: white;
+}
+
+.filters .off {
+  background: white;
+  color: blue;
+}
+
+.filters .disabled {
+  background: white;
+  color: gainsboro;
+}
+
+.filters .date {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.filters .location {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.main {
+  opacity: 1;
+  transition: all 1s;
+}
+
+.fade {
+  opacity: .25;
+  color: gainsboro;
+  transition: all .2s;
+}
+
+@keyframes open {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.suggestions {
+  animation: open 1.8s linear;
+  font-size: 12px;
 }
 
 .container2 {
@@ -167,10 +241,39 @@
 
 .cards article {
   width: 455px;
-  height: 296px;
+  height: 128px;
   border: 1px solid gainsboro;
   border-radius: 4px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cards .selected {
+  border-left: 8px solid #0018A8;
+  transition: all .2s;
+}
+
+.jobtitle {
+  font-size: 18px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.companyname {
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .info {
@@ -190,8 +293,13 @@
 }
 
 .info header {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 150px;
+  height: 92px;
   position: sticky;
   top: 0;
   background-color: white;
@@ -202,12 +310,21 @@
 .info article.description {
   width: 100%;
   padding: 20px;
+  text-align: left;
 }
 
-.info > footer {
+.info footer {
   width: 100%;
-  height: 150px;
+  height: 92px;
   border-top: 1px solid gainsboro;
+  display: flex;
+  padding: 10px;
+}
+
+.info a {
+  color: blue;
+  margin: 0 4px;
+  cursor: pointer;
 }
 
 .footer {
@@ -265,6 +382,10 @@
   }
   .cards>article {
     min-width: 100%;
+  }
+
+  .filters {
+    height: 90vh;
   }
 
 }
