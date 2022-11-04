@@ -93,8 +93,8 @@ export default function Home( {data}: PageProps ) {
 }
   // job search input change handler, and click handlers for option (filter) buttons
   const jobTitleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setJobTitle(e.target.value);
-  const dateSetHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setDateFilter(e.target.value);
-  const entriesSetHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setEntriesFilter(e.target.value);
+  const dateSetHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setDateFilter(e.currentTarget.value);
+  const entriesSetHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setEntriesFilter(e.currentTarget.value);
   const locationChangeHandler = (city: string, state: string) => setLocationFilter({city, state});
 
   // useEffect for updating search parameters
@@ -138,7 +138,7 @@ export default function Home( {data}: PageProps ) {
             <button onClick={toggleHandler}>Filters</button>
           </span>
           <datalist id="joblist">
-          {jobTitleDataList?.map((item, index)=><option key={index} value={item.name} />)}
+          {jobTitleDataList?.map((item: any, index: number)=><option key={index} value={item.name} />)}
           </datalist>
 
           {showOptions ? <>
@@ -185,8 +185,8 @@ export default function Home( {data}: PageProps ) {
   <main className={isLoading ? style.fade : style.main}>
     <div className={style.container2}>
       <section className={style.cards}>
-        {data.jobs?.length > 0 ? data.jobs.map((item, index)=>
-          <article key={index} id={index} onClick={indexHandler} className={jobIndex === index ? style.selected : null}>
+        {data.jobs?.length > 0 ? data.jobs.map((item: any, index: number)=>
+          <article key={index} id={index.toString()} onClick={indexHandler} className={jobIndex === index ? style.selected : ""}>
             <p className={style.jobtitle}>{item.jobTitle}</p>
             <p className={style.comapanyname}><MdWork/> {item.companyName}</p>
             <p className={style.location}><MdPlace/>{item.OBJcity}, {item.OBJstateCode}</p>
@@ -203,7 +203,7 @@ export default function Home( {data}: PageProps ) {
             <p>{data.jobs[jobIndex]?.jobDescription.replace(/<\/?[^>]+(>|$)/g, "")}</p>
         </article>
         <footer>
-          {jobTitleDataList ? <div className={style.suggestions}><MdSearch/> You may also try: {jobTitleDataList.map(item=><a>{item.name}</a>)}</div> : null}
+          {jobTitleDataList ? <div className={style.suggestions}><MdSearch/> You may also try: {jobTitleDataList.map((item: any)=><a>{item.name}</a>)}</div> : null}
       </footer>
       </section>
     </div>
@@ -248,7 +248,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     "fetchJobDesc": true,
     "jobTitle": titleParam,
     "locations": [{"city": cityParam, "state": stateParam}],
-    "numJobs": parseInt(entriesParam),
+    "numJobs": parseInt(entriesParam as string),
     "previousListingHashes": []
     }).then(res =>{
       console.log("what",res)
