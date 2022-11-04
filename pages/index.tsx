@@ -124,7 +124,7 @@ export default function Home( {data}: PageProps ) {
     <div className={style.container}>
       <h1>JOB SEARCH</h1>
       <hr/>
-      <p>{isLoading ? "Searching for jobs..." : "Jobs found: " + data.total}</p>
+      <p>{isLoading ? "Searching for local jobs..." : "Jobs found: " + data.total}</p>
     </div>
   </header>
 
